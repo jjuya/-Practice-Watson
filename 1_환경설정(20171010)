@@ -1,0 +1,24 @@
+# Spring
+1) STS 실행
+2) Perspective : Spring으로 변경
+3) Spring Legacy Project > Spring MVC Project
+
+
+# pom.xml
+- library를 관리하기 위해 maven을 사용
+- web library > dependency
+- pom.xml에서 관리한다.
+
+# watson library 추가
+- https://github.com/watson-developer-cloud/java-sdk
+
+	<dependency>
+		<groupId>com.ibm.watson.developer_cloud</groupId>
+		<artifactId>java-sdk</artifactId>
+		<version>4.0.0</version>
+	</dependency>
+1) 위의 dependency를 pom.xml에 복사 붙여 넣기
+2) version 3.8로 변경
+
+- manual : http://watson-developer-cloud.github.io/java-sdk
+- dependency는 C:\Users\student\.m2 에 library들이 저장 및 관리

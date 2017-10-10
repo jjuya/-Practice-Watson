@@ -1,0 +1,13 @@
+# src.main.webapp
+	1) resources : 이미지, javascript, css 등
+	- 다른 디렉토리에 있는 외부자원에 접근하기 위해서
+		src\main\webapp\WEB-INF\spring\appServlet\servlet-context.xml 열어 수정
+		<resources mapping="/폴더 이름/**" location="/resources/" />
+	2) WEB-INF
+
+# src/main/java : java sources
+
+# src/main/resources
+
+
+# src/test/java, src/test/resources : test 용

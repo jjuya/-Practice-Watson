@@ -1,0 +1,30 @@
+# src\main\webapp\WEB-INF\spring\appServlet\servlet-context.xml
+
+1) Controller : 프론트, 액션
+	<context:component-scan base-package="com.n1books.dev" />
+	
+2) View
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+cf) @
+Client(Browser)		---		Server	---		DB
+								이 두 사이를 레이어화
+	
+1. 기본 환경 익히기
+	
+	1) src/main/java에 com.n1books.dev.controller package 생성
+	
+	2) Text2SpeechController.class 생성
+	
+	3) /WEB-INF/views에 hello.jsp 생성
+	
+	4) Run On Server : http://localhost/dev/hello
+	
+	
+2. Text To Speech 적용	
+	- 일단 구현해보렴
+	

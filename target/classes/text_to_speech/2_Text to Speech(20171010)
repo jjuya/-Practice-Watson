@@ -1,0 +1,107 @@
+# Text to Speech
+- Package : text_to_speech
+
+	{
+  		"url": "https://stream.watsonplatform.net/text-to-speech/api",
+  		"username": "c58778da-81f2-47a4-991e-f99459a065d1",
+  		"password": "NX0F8bca6WG2"
+	}
+
+- API explorer : https://watson-api-explorer.mybluemix.net/apis/text-to-speech-v1
+- API reference : https://www.ibm.com/watson/developercloud/text-to-speech/api/v1/
+
+1. TextToSpeechTest1
+- API reference
+	
+	TextToSpeech service = new TextToSpeech("<username>", "<password>");
+	// TextToSpeech service = new TextToSpeech();
+	//service.setUsernameAndPassword("<username>", "<password>");
+	
+	** Get Voices **
+	List<Voice> voices = service.getVoices().execute();
+	System.out.println(voices);
+	
+	** Get a Voice **
+	Voice voice = service.getVoice("en-US_AllisonVoice").execute();
+	System.out.println(voice);
+	
+	** Synthesize audio : workspace에 파일 저장  **
+	try {
+			String text = "Hello world";
+			InputStream stream = service.synthesize(text, Voice.EN_ALLISON,
+					AudioFormat.WAV).execute();
+			InputStream in = WaveUtils.reWriteWaveHeader(stream);
+			OutputStream out = new FileOutputStream("hello_world.wav");
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = in.read(buffer)) > 0) {
+				out.write(buffer, 0, length);
+			}
+			out.close();
+			in.close();
+			stream.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+- Run As Java Application
+
+# Class WatsonService
+- 서비스에 대한 추상클래스(서비스 마다 인스턴스를 만들면 프로그램이 무거워진다.)
+- 서비스에 따라 확장해서 각각 구현
+- 인스턴스를 만들어서 upcasting으로 처리해도 된다.	
+
+2. TextToSpeechTest2(main class)
+	
+	1) 	Text2SpeechService service 		= 	new Text2SpeechServiceImpl();
+		(interface TextToSpeechService) 	(class Text2SpeechServiceImpl)
+ 	- instance를 만들어 upcasting해서 사용
+	
+	
+	2) beaninit.xml 생성
+	- Spring bean Configuration
+		ex) LgTV tv = new LgTV() = <bean name="tv" class="LgTV" ...></bean>
+	
+		<bean name="service" class="text_to_speech.Text2SpeechServiceImpl" />
+		(= text_to_speech.Text2SpeechServiceImpl service = new text_to_speech.Text2SpeechServiceImpl(); )
+	- Spring에서 text_to_speech.Text2SpeechServiceImpl의 instance를 생성해준다.
+	- name 대신 id사용 가능 > '/'같은 문자열 가능 > 왠만하면 id로 사용해라
+	
+	3) 	ApplicationContext context = new ClassPathXmlApplicationContext("text_to_speech/beaninit.xml");
+																	   ("beaninit.xml", TextToSpeechTest2.class) > 현재 위치한 디렉토리에서 찾겠다.
+		Text2SpeechService service = (Text2SpeechService)context.getBean("service");
+	- 위에서 만든 instance를 주입해주면 된다.
+	- http://toby.epril.com/?p=1015
+	
+	4) 	beaninit.xml의 namespace의 context 체크후 저장 & 코드 추가
+		: <context:component-scan base-package="text_to_speech" />
+	
+		Text2SpeechServiceImpl.class에 추가
+		: @Component("service")
+	- class의 instance화
+	- @Component = Text2SpeechServiceImpl text2SpeechServiceImpl = new Text2SpeechServiceImpl()
+ 	- @Component("service") = Text2SpeechServiceImpl service = new Text2SpeechServiceImpl()
+	- 미리 @붙은 것을 instance화 > 가져다 쓰기만 하면 된다. plug in 처럼
+		
+	cf) IoC -> DI(Dependency Injection) : 의존관계주입, 의존성주입 > 인스턴스 주입?
+		(https://www.slideshare.net/baejjae93/dependency-injection-36867592)
+		@Component 		(java에서 쓰는 Spring bean)
+			@Controller	(user controller)
+			@Service	(service layer)
+			@Repository	(db, file등 영속적 layer)
+		@RestController	(rest service를 지원 ver 4에 추가, json, xml)
+	- 설정 파일을 만들어 놓고 사용
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
