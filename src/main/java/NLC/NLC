@@ -1,0 +1,15 @@
+# Watson NLC
+
+- training data : https://github.com/watson-developer-cloud/natural-language-classifier-nodejs/blob/master/training/weather_data_train.csv
+				  (raw > 복사 > weather.csv 로 저장)
+
+- classify 생성
+	1) Natural Language Classifier > 관리 > Access the beta toolkit
+	2) Add Classifiers
+	3) import training data
+	4) create classify
+
+- NLCExample
+	NaturalLanguageClassifier service = new NaturalLanguageClassifier();
+	service.setUsernameAndPassword("{user id}", "{user pwd}");
+	Classification classification = service.classify("{classify id}",str).execute();

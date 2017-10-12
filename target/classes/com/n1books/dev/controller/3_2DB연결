@@ -1,0 +1,82 @@
+# DB에 data 삽입
+1. interface Text2SpeechDAO, class Text2SpeechDAOImpl 생성
+	- Text2SpeechServiceImpl
+		@Autowired
+		private Text2SpeechDAO text2SpeechDAO;
+		
+	- Text2SpeechDAOImpl
+		@Autowired
+		JdbcTemplate jdbcTemplate;
+
+1-1. class Text2SpeechVO 추가
+		
+2. 
+	- Text2SpeechController : method speaker
+		service.insertText2Speech(vo)
+		
+	- Text2SpeechService에 method 추가
+		public void insertText2Speech(Text2SpeechVO vo) throws Exception;
+		
+	- Text2SpeechServiceImpl에 method 추가
+		@Override
+		public void insertText2Speech(Text2SpeechVO vo) throws Exception {
+			text2SpeechDAO.insertText2Speech(vo);
+		}
+
+3. 	
+	- Text2SpeechDAO에 method 추가
+		void insertText2Speech(Text2SpeechVO vo) throws Exception;
+	
+	- Text2SpeechDAOImpl에 method 추가
+		@Override
+		public void insertText2Speech(Text2SpeechVO vo) throws Exception {
+			Object[] args = new Object[] {
+				vo.getStatement(),
+				vo.getLang()
+			};
+		
+			jdbcTemplate.update(
+					"insert into tbl_text2speech(statement,lang)values(?,?)",args);
+	}
+	
+# DB data 가져오기
+1. Text2SpeechController의 display_voice()에 코드 추가
+	List<Text2SpeechVO> list = service.getText2SpeechList();
+
+2. Text2SpeechService, Text2SpeechServiceImpl 에 method 추가
+	- Text2SpeechService
+	public List<Text2SpeechVO> getText2SpeechList() throws Exception;
+	
+	- Text2SpeechServiceImpl 
+	@Override
+	public List<Text2SpeechVO> getText2SpeechList() throws Exception {
+		return text2SpeechDAO.getText2SpeechList();
+	}
+
+3. Text2SpeechDAO, Text2SpeechDAOImpl에 method 추가
+	- Text2SpeechDAO
+	List<Text2SpeechVO> getText2SpeechList() throws Exception
+	
+	- Text2SpeechDAOImpl
+	@Override
+	public List<Text2SpeechVO> getText2SpeechList() throws Exception {
+		RowMapper<Text2SpeechVO> rowMapper = new RowMapper<Text2SpeechVO>() {
+
+			@Override
+			public Text2SpeechVO mapRow(ResultSet rs, int rownum) throws SQLException {
+				Text2SpeechVO vo = new Text2SpeechVO();
+				vo.setNo(rs.getInt("no"));
+				vo.setStatement(rs.getString("statement"));
+				vo.setLang(rs.getString("lang"));
+				return vo;
+			}
+			
+		};
+		return jdbcTemplate.query(
+			" select no, statement, lang from tbl_text2speech" +
+			" order by no desc", rowMapper);
+	}
+
+4. http://localhost/dev/display
+
+# DB data 삭제

@@ -8,19 +8,16 @@ import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
 
 @Component("service")
+public class Text2SpeechServiceImpl 
+	extends TextToSpeech
+	implements Text2SpeechService {
 
-public class Text2SpeechServiceImpl extends TextToSpeech 
-									implements Text2SpeechService{
-
-	// constructor
 	public Text2SpeechServiceImpl() {
-		setUsernameAndPassword("c58778da-81f2-47a4-991e-f99459a065d1", "NX0F8bca6WG2");
+		setUsernameAndPassword(
+			"0a3f4d46-2ab1-4b73-ab79-9970543734ce", "MEOCGJkFDFTv");
 	}
-	
-	// method
-	public List<Voice> getVoiceList() throws Exception {		
-		
+
+	public List<Voice> getVoiceList() throws Exception {
 		return getVoices().execute();
 	}
-	
-} //end class
+}
