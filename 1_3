@@ -1,0 +1,30 @@
+# Watson 샘플코드
+- https://github.com/ibmecod
+	- https://github.com/ibmecod/nodejs-cloudant
+# Bluemix CLI
+- https://clis.ng.bluemix.net
+
+- Window용 다운로드
+
+#
+1) C:\dev\CLI에 nodejs-cloudant-master 압축풀기
+2) bluemix login -u jju9381@naver.com -o jju -s dev > 2
+3) bx info
+4) bx service offerings : bluemix에서 제공하는 서비스를 나열
+5) bx service create CloudantNoSQLDB Lite myCloudantDB
+6) bx app push favapp-tor-20171013 -c "node app.js" -m 128M --no-manifest --no-start
+7) bx service bind favapp-tor-20171013 myCloudantDB : DB랑 연동
+
+# Eclipse에서
+- Eclipse marketplace : bluemix 검색
+	IBM ... 다운로드
+
+- Servers
+	1) New - Server - IBM - IBM Bluemix
+	2) Bluemix 계정으로 로그인
+	3) Finish
+	
+- project import
+	manu... 삭제
+
+- IBM Bluemix로 실행

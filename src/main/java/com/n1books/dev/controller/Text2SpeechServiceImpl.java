@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
@@ -16,6 +17,7 @@ public class Text2SpeechServiceImpl
 	implements Text2SpeechService {
 	
 	@Autowired
+	@Qualifier("ibatis")
 	private Text2SpeechDAO text2SpeechDAO;
 
 	public Text2SpeechServiceImpl() {
@@ -32,9 +34,19 @@ public class Text2SpeechServiceImpl
 		return synthesize(statement, new Voice(voice,null,null), AudioFormat.OGG).execute();
 	}
 
+//	@Override
+//	public void insertText2Speech(Text2SpeechVO vo) throws Exception {
+//		text2SpeechDAO.insertText2Speech(vo);
+//	}
+	
 	@Override
 	public void insertText2Speech(Text2SpeechVO vo) throws Exception {
-		text2SpeechDAO.insertText2Speech(vo);
+		try {
+			text2SpeechDAO.insertText2Speech(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
@@ -42,8 +54,15 @@ public class Text2SpeechServiceImpl
 		return text2SpeechDAO.getText2SpeechList();
 	}
 
+//	@Override
+//	public void deleteText2Speech(int no) throws Exception {
+//		text2SpeechDAO.deleteText2Speech(no);
+//	}
+	
 	@Override
 	public void deleteText2Speech(int no) throws Exception {
-		text2SpeechDAO.deleteText2Speech(no);
+		if (text2SpeechDAO.deleteText2Speech(no) == 0) {
+			throw new RuntimeException("없는 번호입니다");
+		}
 	}
 }

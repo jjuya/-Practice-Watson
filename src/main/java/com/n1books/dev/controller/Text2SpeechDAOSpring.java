@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class Text2SpeechDAOImpl implements Text2SpeechDAO {
+@Repository("springJDBC")
+public class Text2SpeechDAOSpring implements Text2SpeechDAO {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -49,9 +49,11 @@ public class Text2SpeechDAOImpl implements Text2SpeechDAO {
 	}
 
 	@Override
-	public void deleteText2Speech(int no) throws Exception {
+	public int deleteText2Speech(int no) throws Exception {
 		
-		jdbcTemplate.update("delete from tbl_text2speech where no = ?", no);		
+		jdbcTemplate.update("delete from tbl_text2speech where no = ?", no);	
+		
+		return 0;
 	}
 	
 } //end class

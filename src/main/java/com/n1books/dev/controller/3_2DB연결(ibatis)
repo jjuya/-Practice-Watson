@@ -1,0 +1,15 @@
+# DB에 data 삽입
+1. src/main/resources에 ibatis/text2speech-mapping.xml 추가
+	- namespace = "tts"
+	
+2. class Text2SpeechDAOIbatis 생성
+	- @Repository("ibatis")
+		
+3. Text2SpeechServiceImpl
+	@Autowired
+	@Qualifier("ibatis")
+	private Text2SpeechDAO text2SpeechDAO;
+
+4. text2speech-mapping.xml 에 query 정리
+	
+	
