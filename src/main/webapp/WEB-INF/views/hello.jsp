@@ -37,7 +37,7 @@
 				<td>${vo.no}</td>
 				<td>${vo.statement}</td>
 				<td>${vo.lang}</td>
-				<td><a href="delete?no=${vo.no}" id=del class="btn btn-default btn-danger btn-block">삭제</a></td>
+				<td><a href="delete/${vo.no}" id=del class="btn btn-default btn-danger btn-block">삭제</a></td>
 			</tr>
 		</c:forEach>
 			
