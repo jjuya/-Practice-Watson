@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
@@ -33,6 +36,16 @@ public class Text2SpeechController {
 	@RequestMapping("hello")
 	public ModelAndView hello() {
 		return new ModelAndView("hello", "msg", "Hello MVC");
+	}
+	
+	@RequestMapping(
+			value="displayJSON2",
+			headers="Accept=application/json;charset=UTF-8",
+			produces= {MediaType.APPLICATION_JSON_UTF8_VALUE}
+			)
+	@ResponseBody
+	public List<Text2SpeechVO> display_json() throws Exception {
+		return service.getText2SpeechList();
 	}
 	
 	@RequestMapping("display")
@@ -83,7 +96,7 @@ public class Text2SpeechController {
 				"Content-Disposition", "attachment;filename=" +
 				URLEncoder.encode("voice.ogg","UTF-8"));
 		
-		service.insertText2Speech(vo);
+		//service.insertText2Speech(vo);
 		
 		InputStream is = service.getSpeech(vo.getStatement(), vo.getLang());
 		OutputStream os = response.getOutputStream();

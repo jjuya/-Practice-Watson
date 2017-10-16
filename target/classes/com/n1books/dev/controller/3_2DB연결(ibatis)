@@ -1,4 +1,32 @@
 # DB에 data 삽입
+	1) 
+ 	   Spring Framework: IBATIS(https://mvnrepository.com/artifact/org.springframework/spring-ibatis)
+ 	
+ 	2) pom.xml
+ 		<dependency>
+    		<groupId>org.apache.ibatis</groupId>
+    		<artifactId>ibatis-sqlmap</artifactId>
+    		<version>2.3.4.726</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-ibatis</artifactId>
+		    <version>2.0.8</version>
+		</dependency>
+		
+ 	3) servlet-context.xml
+ 		<beans:bean id="sqlMapClientFactory" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+			<beans:property name="dataSource" ref="dataSource" />
+			<beans:property name="configLocation" value="/WEB-INF/SqlMapConfig.xml"></beans:property>
+		</beans:bean>
+		
+		<beans:bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+			<beans:property name="sqlMapClient" ref="sqlMapClientTemplate" />
+		</beans:bean>
+	
+	4) WEB-INF에 SqlMapConfig.xml 만들기 	
+	
 1. src/main/resources에 ibatis/text2speech-mapping.xml 추가
 	- namespace = "tts"
 	

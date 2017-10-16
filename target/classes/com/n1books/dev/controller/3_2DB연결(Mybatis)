@@ -1,0 +1,62 @@
+1. pom.xml : Mybatis 추가
+- mybatis 브릿지 : DAO를 추가 안해도 된다?
+	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>1.3.1</version>
+		</dependency>
+
+- Mybtis
+	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.4.5</version>
+		</dependency>
+		
+2. servlet-context.xml
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="typeAliasesPackage" value="com.n1books.dev.controller" />
+	</beans:bean>
+	
+	<beans:bean id="text2SpeechDAOMybatis" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+		<beans:property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<beans:property name="mapperInterface" value="com.n1books.dev.controller.Text2SpeechDAO" />
+	</beans:bean>
+	<!-- DAO를 받아 XML에 바로 접근, DAOImpl이 자동으로 생성 -->
+	
+3. src/main/resources 에 com.n1books.dev.controller.Text2SpeechDAO.xml 생성
+	- DAO랑 같은 이름의 XML생성 > MapperFactoryBean을 통해 DAO에서 자동으로 찾아간다.
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper     
+    PUBLIC "-//myibatis.org//DTD Mapper 3.0//EN"      
+    "http://myibatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.n1books.dev.controller.Text2SpeechDAO">
+
+	<select id="getText2SpeechList" resultType="Text2SpeechVO">
+	select no, statement, lang from tbl_text2speech
+	order by no desc
+	</select>
+	
+	<insert id="insertText2Speech" parameterType="Text2SpeechVO">
+	insert into tbl_text2speech(statement,lang)values(#{statement},#{lang})
+	</insert>
+	
+	<delete id="deleteText2Speech" parameterType="int">
+	delete from tbl_text2speech
+	where  no = #{no}
+	</delete>
+
+</mapper>
+
+4. Text2SpeechServiceImpl에 mybatis 주입 
+	@Autowired
+	@Qualifier("text2SpeechDAOMybatis")
+	private Text2SpeechDAO text2SpeechDAO;
+	
+	
+	

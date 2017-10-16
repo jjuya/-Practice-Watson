@@ -34,9 +34,9 @@ $(document).ready(function() {
 	<div class="row">
 		<div class="col-lg-12 col-sm-12">
 			<textarea rows="7" name="statement" class="form-control">
-				There's a lady who's sure
-				All that glitters is gold
-				And she's buying a stairway to heaven
+There's a lady who's sure
+All that glitters is gold
+And she's buying a stairway to heaven
 			</textarea>
 		</div>
 	</div><br/>

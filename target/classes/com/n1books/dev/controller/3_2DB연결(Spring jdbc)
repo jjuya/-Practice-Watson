@@ -1,4 +1,18 @@
 # DB에 data 삽입
+
+- servlet-context.xml
+ 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/oracle"/>
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<beans:property name="username" value="oracle"/>
+		<beans:property name="password" value="oracle"/>
+	</beans:bean>
+	- 1, 2의 역할을 해준다
+	
+	<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
 1. interface Text2SpeechDAO, class Text2SpeechDAOImpl 생성
 	- Text2SpeechServiceImpl
 		@Autowired
