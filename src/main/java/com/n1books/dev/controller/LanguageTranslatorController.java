@@ -26,7 +26,7 @@ public class LanguageTranslatorController {
 	@RequestMapping(value="identified", method=RequestMethod.GET)
 	public ModelAndView identifiedLang(@RequestParam("text") String text) {
 		
-		LanguageTranslator service = new LanguageTranslator("78f3a3c1-5e69-479d-a33c-e68523fc51c0", "mkcxYRdFf7TB");
+		LanguageTranslator service = new LanguageTranslator("<user name>", "<password>");
 		
 		List <IdentifiedLanguage> langs = service.identify(text).execute();
 		

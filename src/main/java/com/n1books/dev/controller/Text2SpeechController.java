@@ -51,7 +51,7 @@ public class Text2SpeechController {
 	@RequestMapping("display")
 	public ModelAndView display_voice() throws Exception {
 		TextToSpeech service2 = new TextToSpeech(
-				"c58778da-81f2-47a4-991e-f99459a065d1", "NX0F8bca6WG2");
+				"<user name>", "<password>");
 		
 		//db data list
 		List<Text2SpeechVO> list = service.getText2SpeechList();

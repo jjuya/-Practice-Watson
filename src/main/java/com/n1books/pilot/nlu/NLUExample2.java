@@ -7,8 +7,8 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Co
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
 
 public class NLUExample2 {
-	private static String username = "f2e6fa89-7132-4bbb-a01e-4444acade02b";
-	private static String password = "EzU5tHFOORxb";
+	private static String username = "";
+	private static String password = "";
 	private static String text = 
 		"백악관 트럼프, 내달 7일 문대통령과 정상회담·국회연설(워싱턴 AP=연합뉴스) 도널드 트럼프 미국 대통령이 지난 16일(현지시간) 워싱턴DC 인근 앤드루스 공군기지에서 전용기 에어포스원에 오르며 손을 흔들고 있다.";
 	

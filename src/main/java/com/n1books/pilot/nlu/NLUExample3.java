@@ -10,8 +10,8 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Em
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
 
 public class NLUExample3 {
-	private static String username = "f2e6fa89-7132-4bbb-a01e-4444acade02b";
-	private static String password = "EzU5tHFOORxb";
+	private static String username = "";
+	private static String password = "";
 	private static String text = 
 				"Whether we have seen eye-to-eye or rarely agreed at all, my conversations with" +
 				" you, the American people — in living rooms and in schools; at farms and on " +

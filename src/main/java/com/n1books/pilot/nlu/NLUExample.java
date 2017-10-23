@@ -7,8 +7,8 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Co
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
 
 public class NLUExample {
-	private static String username = "f2e6fa89-7132-4bbb-a01e-4444acade02b";
-	private static String password = "EzU5tHFOORxb";
+	private static String username = "";
+	private static String password = "";
 	private static String url = "http://www.yonhapnews.co.kr/bulletin/2017/10/17/0200000000AKR20171017116400001.HTML?input=1195m";
 	
 	public static void main(String[] args) {

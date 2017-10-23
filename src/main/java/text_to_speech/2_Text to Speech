@@ -1,11 +1,6 @@
 # Text to Speech
 - Package : text_to_speech
 
-	{
-  		"url": "https://stream.watsonplatform.net/text-to-speech/api",
-  		"username": "c58778da-81f2-47a4-991e-f99459a065d1",
-  		"password": "NX0F8bca6WG2"
-	}
 
 - API explorer : https://watson-api-explorer.mybluemix.net/apis/text-to-speech-v1
 - API reference : https://www.ibm.com/watson/developercloud/text-to-speech/api/v1/
